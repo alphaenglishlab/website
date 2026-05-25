@@ -15,17 +15,29 @@
     }
 
     h1 {
-      font-size: 42px;
+      font-size: 48px;
+      margin-bottom: 10px;
     }
 
-    p {
-      font-size: 18px;
+    .sub {
+      font-size: 20px;
       color: #555;
+      margin-bottom: 30px;
+    }
+
+    .notice {
+      background: #fff3cd;
+      color: #856404;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 18px;
+      margin: 30px auto;
+      max-width: 600px;
     }
 
     .btn {
       display: block;
-      width: 300px;
+      width: 320px;
       margin: 20px auto;
       padding: 18px;
       background: #111;
@@ -35,18 +47,40 @@
       font-size: 18px;
     }
 
-    .btn:hover {
-      opacity: 0.8;
+    .disabled {
+      background: #999;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .xlink {
+      margin-top: 30px;
+      font-size: 16px;
+    }
+
+    .xlink a {
+      color: #1d9bf0;
+      text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
   <h1>アルファ英語教材</h1>
-  <p>Xから来てくれてありがとうございます。</p>
+  <p class="sub">Xから来てくれてありがとうございます。</p>
 
-  <a class="btn" href="#">無料教材はこちら</a>
-  <a class="btn" href="#">有料教材はこちら</a>
+  <div class="notice">
+    🚧 教材サイト準備中です。<br>
+    無料教材・有料教材を順次追加予定です。
+  </div>
+
+  <a class="btn disabled">無料教材（準備中）</a>
+  <a class="btn disabled">有料教材（準備中）</a>
+
+  <div class="xlink">
+    最新情報は <a href="https://x.com/君のID" target="_blank">Xで更新中</a>
+  </div>
 
 </body>
 </html>
