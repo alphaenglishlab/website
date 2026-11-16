@@ -30,7 +30,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import fitz
-          files=sorted(Path('.').glob('仮定法_*.pdf'))
+          files=sorted(p for p in Path('.').glob('仮定法_*.pdf') if 'クジラ構文' not in p.name)
           assert len(files)==6, f'Expected 6 PDFs, got {len(files)}'
           for file in files:
               d=fitz.open(file)
@@ -41,7 +41,7 @@ jobs:
                       assert w[0]>38 and w[2]<560 and w[1]>14 and w[3]<830, (file,w)
               body=' '.join(page.get_text() for page in d)
               assert '解答' in body and '全文和訳' in body, file
-              assert 'no less than' not in body.lower() and 'not more than' not in body.lower()
+              assert all(x not in body.lower() for x in ['no less than','not more than','no more a fish than','whale','クジラ構文'])
               print(file, len(d),'pages',file.stat().st_size,'bytes: OK')
           PY
       - name: Publish PDFs to GitHub
