@@ -14,9 +14,18 @@ with tarfile.open(fileobj=io.BytesIO(raw),mode='r:') as tar:
         assert member.name in ('data.py','build.py')
         assert member.isfile()
         (target / member.name).write_bytes(tar.extractfile(member).read())
+patch = lzma.decompress(base64.b85decode((root / 'patch-subjunctive-lesson4.b85').read_text(encoding='ascii'))).decode('utf-8')
+data_file = target / 'data.py'
+data_file.write_text(data_file.read_text(encoding='utf-8') + '\n' + patch, encoding='utf-8')
 script = target / 'build.py'
 body = script.read_text(encoding='utf-8')
 body = body.replace('/mnt/data/subjunctive_final', '.')
+comparison_note_start = "  if self.lesson['slug']=='クジラ構文・慣用表現応用':"
+if comparison_note_start in body:
+    i = body.index(comparison_note_start)
+    j = body.index("  if self.lesson['slug']=='仮定法現在':", i)
+    body = body[:i] + body[j:]
+
 fonts = {
     'LiberationSerif-Regular.ttf': 'Liberation Serif:style=Regular',
     'LiberationSerif-Bold.ttf': 'Liberation Serif:style=Bold',
